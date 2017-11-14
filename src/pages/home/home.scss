@@ -1,3 +1,11 @@
 page-home {
-
+    ion-slides{
+        height: 50px !important;
+    }
+    .swiper-wrapper{
+        width: 100px !important;
+    }
+    .swiper-slide,.swiper-slide-active{
+        width: 100px important;
+    }
 }

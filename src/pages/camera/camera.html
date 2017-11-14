@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>camera</ion-title>
+  </ion-navbar>
+  <ion-buttons end>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="changeFilter()">
+          <ion-icon name="color-filter"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="reverseCamera()">
+          <ion-icon name="reverse-camera"></ion-icon>
+        </button>
+        <button ion-button icon-only (click)="takePicture()">
+          <ion-icon name="camera"></ion-icon>
+        </button>
+      </ion-buttons>
+      <!-- <button ion-button (click)="startCamera()">打开相机</button>
+      <button ion-button (click)="stopCamera()">关闭相机</button>
+      <button ion-button (click)="switchCamera()">切换相机</button> -->
+    <!-- <button (click)="startCamera()" block>打开相机</button>
+    <button (click)="closeCamera()">关闭相机</button>
+    <button (click)="switchCamera()">切换相机</button> -->
+  </ion-buttons>
+</ion-header>
+
+<ion-content padding>
+  <!-- <h2>Welcome to Ionic!</h2>
+  <p>
+    This starter project comes with simple tabs-based layout for apps
+    that are going to primarily use a Tabbed UI.
+  </p>
+  <p>
+    Take a look at the <code>src/pages/</code> directory to add or change tabs,
+    update any existing page or create new pages.
+  </p> -->
+    <div class="camera-preview-container" #cameraPreviewContainer></div>
+</ion-content>
