@@ -7,6 +7,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Base64ToGallery } from "@ionic-native/base64-to-gallery";
 import {Toast} from "@ionic-native/toast";
 import 'rxjs/add/operator/first';
+declare var AlloyCrop;
 
 /**
  * Generated class for the CameraPage page.
@@ -37,6 +38,9 @@ export class CameraPage {
     'SEPIA'
   ];
 
+  private cropSrc: string ;
+  private imgSrc: string ;
+
   private currentColorFilterIndex: number = 0;
 
   constructor(
@@ -51,9 +55,14 @@ export class CameraPage {
       height: this.takeOpts.height,
       quality: 50
     })
-      .then(pic => this.base64ToGallery.base64ToGallery(pic[0], null))
+      .then(pic => {
+        // this.base64ToGallery.base64ToGallery(pic[0], null)
+        this.cropSrc = 'data:image/jpeg;base64,' + pic;
+        this.imgSrc = 'data:image/jpeg;base64,' + pic;
+      })
       .then(() => {
         this.toast.show('Picture taken and saved to gallery', '5000', 'center').subscribe();
+        this.ngOnDestroy();
       })
       .catch(e => console.log(e));
   }
@@ -123,5 +132,22 @@ export class CameraPage {
   private stopCamera(){
     this.cameraPreview.stopCamera();
   }
-  
+
+  crop() {
+    new AlloyCrop({//api:https://github.com/AlloyTeam/AlloyCrop
+      image_src: this.imgSrc,
+      circle: true, // optional parameters , the default value is false
+      width: 256, // crop width
+      height: 256, // crop height
+      output: 1, // output resolution --> 400*200
+      ok: (base64, canvas) => {
+        this.cropSrc = base64;
+      },
+      cancel: () => {
+      },
+      ok_text: "确定", // optional parameters , the default value is ok
+      cancel_text: "取消" // optional parameters , the default value is cancel
+    });
+  }
+
 }
